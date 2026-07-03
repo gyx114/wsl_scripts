@@ -1,0 +1,21 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+    echo "用法: download <URL> [文件名]"
+    echo "示例: download https://example.com/file.zip"
+    echo "示例: download https://example.com/file.zip myfile.zip"
+    exit 1
+fi
+URL="$1"
+FILENAME="${2:-$(basename "$URL")}"
+DEST="/mnt/c/Users/guany/Desktop/$FILENAME"
+echo "📥 下载: $FILENAME → 桌面"
+echo ""
+curl -L --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" -# -o "$DEST" "$URL"
+if [ -f "$DEST" ]; then
+    echo ""
+    echo "✅ 下载完成!"
+    ls -lh "$DEST" | awk '{print "📦 大小: " $5}'
+    echo "📁 位置: $DEST"
+else
+    echo "❌ 下载失败，请检查 URL 或网络"
+fi

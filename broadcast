@@ -1,0 +1,7 @@
+#!/bin/bash
+msg="$*"
+if [ -z "$msg" ]; then
+    echo "用法: speak <要播报的内容>"
+    exit 1
+fi
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('$msg')"

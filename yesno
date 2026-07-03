@@ -1,0 +1,23 @@
+#!/bin/bash
+msg="${1:-是否继续？}"
+title="${2:-请确认}"
+result=$(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c "\$wsh=New-Object -ComObject Wscript.Shell; \$r=\$wsh.Popup('$msg',20,'$title',4+4096); Write-Host \$r; exit \$r" 2>/dev/null)
+exit_code=$?
+if [[ -z "$result" ]]; then
+    result=$exit_code
+else
+    result=$(echo "$result" | tail -1)
+fi
+if [[ "$result" -eq 6 ]]; then
+    echo "是"
+    exit 0
+elif [[ "$result" -eq 7 ]]; then
+    echo "否"
+    exit 1
+elif [[ "$result" -eq -1 ]]; then
+    echo "超时"
+    exit 1
+else
+    echo "$result"
+    exit 1
+fi

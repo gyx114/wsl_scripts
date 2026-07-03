@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+    echo "用法: findprocess <进程名>"
+    echo "示例: findprocess chrome"
+    exit 1
+fi
+echo "=== 查找进程: $1 ==="
+/mnt/c/Windows/System32/tasklist.exe | /mnt/c/Windows/System32/findstr.exe /i "$1"

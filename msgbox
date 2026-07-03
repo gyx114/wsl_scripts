@@ -1,0 +1,4 @@
+#!/bin/bash
+msg="${1:-提示信息}"
+title="${2:-提示}"
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c "\$wsh=New-Object -ComObject Wscript.Shell; \$wsh.Popup('$msg',20,'$title',0+4096)" 2>/dev/null

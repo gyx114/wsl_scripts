@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+    echo "用法: kill <进程名或PID>"
+    echo "示例: kill chrome.exe"
+    echo "示例: kill 1234"
+    exit 1
+fi
+if [[ "$1" =~ ^[0-9]+$ ]]; then
+    echo "终止 PID: $1"
+    taskkill.exe /f /pid "$1"
+else
+    echo "终止进程: $1"
+    taskkill.exe /f /im "$1"
+fi

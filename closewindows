@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+    echo "用法: closewindows <窗口标题关键词>"
+    exit 1
+fi
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -Command "\$p = Get-Process | Where-Object { \$_.MainWindowTitle -like '*$1*' }; if (\$p) { \$p | ForEach-Object { Write-Host \"关闭: \$(\$_.MainWindowTitle)\"; Stop-Process -Id \$_.Id -Force } } else { Write-Host '没找到匹配的窗口' }"

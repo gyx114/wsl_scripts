@@ -1,0 +1,7 @@
+#!/bin/bash
+result=$(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "Get-Process -Name LogonUI -ErrorAction SilentlyContinue" 2>/dev/null)
+if [ -n "$result" ]; then
+    echo "🔒 已锁屏"
+else
+    echo "✅ 未锁屏"
+fi
